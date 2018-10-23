@@ -12,10 +12,12 @@ use App\Http\Controllers\Controller;
 
 class WeiXinController extends Controller
 {
+    var $appid;
+    var $secret;
     public function __construct(){
         $config = config('weixin');
-        $appid =$config['appid'];
-        $secret =$config['secret'];
+        $this->appid =$config['appid'];
+        $this->secret =$config['secret'];
     }
 
     private function curlGet($url)
