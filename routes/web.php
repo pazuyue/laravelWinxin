@@ -15,6 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/getOpenid', 'WenXin\WenXinController@getOpenid');
+Route::get('/getOpenid', 'WeiXin\WenXinController@getOpenid');
 
 
