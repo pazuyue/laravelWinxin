@@ -33,7 +33,7 @@ class WeiXinController extends Controller
         $url .= '&scope=snsapi_userinfo';
         $url .= '&#wechat_redirect';
 
-        header('Location:'.$url);
+        return redirect($url);
 
     }
 
