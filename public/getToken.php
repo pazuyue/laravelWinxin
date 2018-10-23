@@ -21,9 +21,15 @@ class wechatCallbackapiTest
 
     {
 
-        $this->responseMsg();
+        if ($this->checkSignature()) {
+            $this->responseMsg();
+            exit;
+        }else{
+            $myfile = fopen("/data/www/laravelWx.com/public/test.txt", "w") or die("Unable to open file!");
+            fwrite($myfile, "checkSignature失败");
+            fclose($myfile);
+        }
 
-        exit;
 
     }
 
@@ -34,7 +40,9 @@ class wechatCallbackapiTest
         //get post data, May be due to the different environments
 
         $postStr = file_get_contents("php://input");
-
+        $myfile = fopen("/data/www/laravelWx.com/public/test.txt", "w") or die("Unable to open file!");
+        fwrite($myfile, $postStr);
+        fclose($myfile);
 
         //extract post data
 
@@ -42,10 +50,7 @@ class wechatCallbackapiTest
 
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
 
-            $myfile = fopen("/data/www/laravelWx.com/public/test.txt", "w") or die("Unable to open file!");
 
-            fwrite($myfile, json_encode($postObj));
-            fclose($myfile);
 
             $fromUsername = $postObj->FromUserName;
 
@@ -121,22 +126,18 @@ class wechatCallbackapiTest
     }
 
 
+
     private function checkSignature()
-
     {
-
         $signature = $_GET["signature"];
-
         $timestamp = $_GET["timestamp"];
-
         $nonce = $_GET["nonce"];
-
 
         $token = TOKEN;
 
         $tmpArr = array($token, $timestamp, $nonce);
 
-        sort($tmpArr);
+        sort($tmpArr,SORT_STRING);
 
         $tmpStr = implode($tmpArr);
 
