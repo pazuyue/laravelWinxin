@@ -59,7 +59,7 @@ class WeiXinController extends Controller
         $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?';
         $url .= 'appid=wx98e276bea8ddeca5';
         $url .= '&secret=84415899ceb3c77b58364d2468023cf7';
-        $url .= '&code=021knsvd0drD1t1zcuwd0CV4vd0knsv1';
+        $url .= '&code=061fS4V50YZnPJ1g3mV50fFWU50fS4Vi';
         $url .= '&grant_type=authorization_code';
 
 
