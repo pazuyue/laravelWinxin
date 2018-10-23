@@ -34,6 +34,24 @@ class WeiXinController extends Controller
     }
 
     /**
+     * 判断是否关注
+     */
+    public function actionsubscribe(){
+        $token='14_nkrjAsGQlvYE4HuNXtW8UtfsnrsTqR6haun7NUAmuTiAgznmr_H26FZhNaFSku4OX010n6TgYZWDsHXVVmZBam85NeNtmpYmCouycvMGNBE';
+        $openid='oPuK51SdvJnSnBVoiaIPpce0ebvE';
+        $subscribe_msg = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=$token&openid=$openid";
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL,$subscribe_msg);
+        curl_setopt($ch,CURLOPT_HEADER,0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+        $data = curl_exec($ch);
+        $data = json_decode($data,true);
+        curl_close($ch);
+        dump($data);
+    }
+
+    /**
      * 获取access_token
      */
     public function actionGettoken()
@@ -67,7 +85,8 @@ class WeiXinController extends Controller
         $res = curl_exec($ch);
         curl_close($ch);
         $res = json_decode($res,true);
-
     }
+
+
 
 }

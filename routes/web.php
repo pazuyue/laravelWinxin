@@ -20,3 +20,6 @@ Route::get('/getOpenid', 'WeiXin\WeiXinController@getOpenid');
 Route::get('/actionGetCode', 'WeiXin\WeiXinController@actionGetCode');
 
 Route::get('/actionGettoken', 'WeiXin\WeiXinController@actionGettoken');
+
+Route::get('/actionsubscribe', 'WeiXin\WeiXinController@actionsubscribe');
+
