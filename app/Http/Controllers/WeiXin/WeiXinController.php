@@ -22,9 +22,6 @@ class WeiXinController extends Controller
      */
     public function actionGetCode()
     {
-        $response_type = 'code';
-        $scope = 'snsapi_userinfo';
-
         $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?';
         $url .= 'appid=wx98e276bea8ddeca5';
         $url .= '&redirect_uri=' . urlencode('193.112.109.76/Oauth.php');
@@ -33,7 +30,8 @@ class WeiXinController extends Controller
         $url .= '&scope=snsapi_userinfo';
         $url .= '&#wechat_redirect';
 
-        return redirect($url);
+        dump($url);
+        return redirect()->away($url);
 
     }
 
