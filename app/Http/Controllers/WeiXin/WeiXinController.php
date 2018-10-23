@@ -149,6 +149,8 @@ class WeiXinController extends Controller
             libxml_disable_entity_loader(true);
             //禁止xml实体解析，防止xml注入
             $request_xml = simplexml_load_string($xml_str, 'SimpleXMLElement', LIBXML_NOCDATA);
+
+            dump($request_xml);
             //判断该消息的类型，通过元素MsgType
             return $request_xml;
         }
