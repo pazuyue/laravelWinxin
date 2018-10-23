@@ -123,12 +123,12 @@ class WeiXinController extends Controller
     public function getAccessToken() {
          $url_get = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx98e276bea8ddeca5&secret=84415899ceb3c77b58364d2468023cf7';
          $json = $this->curlGet($url_get);
-        dump($json->access_token);
-         if (!$json->errmsg) {
+        dump($json['access_token']);
+         if (!$json['errmsg']) {
                 } else {
                     dump('获取access_token发生错误：错误代码'.$json->errcode.',微信返回错误信息：'.$json->errmsg) ;
          }
-         return $json->access_token;
+         return $json['access_token'];
         }
 
 
