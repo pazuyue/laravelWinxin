@@ -8,7 +8,10 @@
 
 define("TOKEN", "yueguang");
 
-
+$myfile = fopen("/data/www/laravelWx.com/public/test.txt", "w") or die("Unable to open file!");
+$txt = "Bill Gates\n";
+fwrite($myfile, $txt);
+fclose($myfile);
 $wechatObj = new wechatCallbackapiTest();
 
 $wechatObj->valid();
@@ -33,19 +36,19 @@ class wechatCallbackapiTest
 
         //get post data, May be due to the different environments
 
-        $postStr = file_get_contents("php://input");
-
-
+        $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+        if (empty($postStr)){
+            $postStr ="kong";
+        }
+        $myfile = fopen("/data/www/laravelWx.com/public/test.txt", "w") or die("Unable to open file!");
+        fwrite($myfile, $postStr);
+        fclose($myfile);
         //extract post data
 
-        if (!empty($postStr)) {
+        if (!$postStr='kong') {
+
 
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-
-            $myfile = fopen("/data/www/laravelWx.com/public/test.txt", "w") or die("Unable to open file!");
-
-            fwrite($myfile, json_encode($postObj));
-            fclose($myfile);
 
             $fromUsername = $postObj->FromUserName;
 
@@ -94,14 +97,6 @@ class wechatCallbackapiTest
             } else {
 
                 $contentStr = '没文化真可怕，居然不会打字！';//$this->keyrep($keyword);
-
-                switch ($postObj->MsgType){
-                    case 'event':
-                        $event = $postObj->Event;//判断具体的时间类型（关注、取消、点击）
-                        if ($event=='subscribe') { // 关注事件
-                            $contentStr = "欢迎你关注！";
-                        }
-                }
 
                 //$contentStr = @iconv('UTF-8','gb2312',$keyword);
 
@@ -225,4 +220,3 @@ class wechatCallbackapiTest
     }
 
 }
-
