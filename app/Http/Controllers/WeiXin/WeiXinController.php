@@ -24,7 +24,7 @@ class WeiXinController extends Controller
     {
         $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?';
         $url .= 'appid=wx98e276bea8ddeca5';
-        $url .= '&redirect_uri=' . urlencode('193.112.109.76/Oauth.php');
+        $url .= '&redirect_uri=' . urlencode('http://193.112.109.76/Oauth.php');
         $url .= '&response_type=code';
 
         $url .= '&scope=snsapi_userinfo';
