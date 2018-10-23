@@ -37,18 +37,11 @@ class WeiXinController extends Controller
      * 判断是否关注
      */
     public function actionsubscribe(){
-        $token='14_nkrjAsGQlvYE4HuNXtW8UtfsnrsTqR6haun7NUAmuTiAgznmr_H26FZhNaFSku4OX010n6TgYZWDsHXVVmZBam85NeNtmpYmCouycvMGNBE';
+        $token='14_T9oxX1WOBMzmW0l2O3C0nqiLqTaxXm0EiXKbuN_kKWeTKCQbdI7n4jDOm5ofj4mBpFwsjthhOXlFfgFPKWAazJ_9mc3lW75EFQAfBNHNUXA';
         $openid='oPuK51SdvJnSnBVoiaIPpce0ebvE';
         $subscribe_msg = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=$token&openid=$openid";
-        $ch = curl_init();
-        curl_setopt($ch,CURLOPT_URL,$subscribe_msg);
-        curl_setopt($ch,CURLOPT_HEADER,0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-        $data = curl_exec($ch);
-        $data = json_decode($data,true);
-        curl_close($ch);
-        dump($data);
+        $subscribe = json_decode(file_get_contents($subscribe_msg));
+        dump($subscribe);
     }
 
     /**
