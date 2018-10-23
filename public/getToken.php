@@ -25,3 +25,5 @@ if( $signature == $tmpStr )
 }
 else
     echo "Error";
+
+exit;
