@@ -38,7 +38,6 @@ class WeiXinController extends Controller
      */
     public function actionGettoken()
     {
-        $code = '021knsvd0drD1t1zcuwd0CV4vd0knsv1';
         $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?';
         $url .= 'appid=wx98e276bea8ddeca5';
         $url .= '&secret=84415899ceb3c77b58364d2468023cf7';
