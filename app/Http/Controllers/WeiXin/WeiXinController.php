@@ -71,7 +71,7 @@ class WeiXinController extends Controller
     public function actionGetCode()
     {
         $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?';
-        $url .= 'appid=wx98e276bea8ddeca5';
+        $url .= 'appid='.$this->appid;
         $url .= '&redirect_uri=' . urlencode('http://193.112.109.76/Oauth.php');
         $url .= '&response_type=code';
 
@@ -100,8 +100,8 @@ class WeiXinController extends Controller
     public function actionGettoken()
     {
         $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?';
-        $url .= 'appid=wx98e276bea8ddeca5';
-        $url .= '&secret=84415899ceb3c77b58364d2468023cf7';
+        $url .= 'appid='.$this->appid;
+        $url .= '&secret='.$this->secret;
         $url .= '&code=061fS4V50YZnPJ1g3mV50fFWU50fS4Vi';
         $url .= '&grant_type=authorization_code';
 
