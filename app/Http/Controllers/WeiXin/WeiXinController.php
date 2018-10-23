@@ -12,6 +12,11 @@ use App\Http\Controllers\Controller;
 
 class WeiXinController extends Controller
 {
+    public function __construct(){
+        $config = config('weixin');
+        $appid =$config['appid'];
+        $secret =$config['secret'];
+    }
 
     private function curlGet($url)
     {
@@ -125,7 +130,8 @@ class WeiXinController extends Controller
 
     public function getAccessToken()
     {
-        $url_get = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx98e276bea8ddeca5&secret=84415899ceb3c77b58364d2468023cf7';
+
+        $url_get ="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$this->appid}&secret={$this->secret}";
         $json = $this->curlGet($url_get);
         $json = json_decode($json);
         if (isset($json->errmsg)) {
