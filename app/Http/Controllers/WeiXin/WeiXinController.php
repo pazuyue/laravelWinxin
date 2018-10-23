@@ -26,6 +26,8 @@ class WeiXinController extends Controller
         $data = curl_exec($curl);
         //关闭URL请求
         curl_close($curl);
+        dump($url);
+        dump($data);
         //显示获得的数据
        return $data;
     }
@@ -119,10 +121,9 @@ class WeiXinController extends Controller
         $res = json_decode($res,true);
     }
 
-    private function getAccessToken() {
+    public function getAccessToken() {
          $url_get = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx98e276bea8ddeca5&secret=84415899ceb3c77b58364d2468023cf7';
          $json = json_decode($this->curlGet($url_get));
-            dump($json);die;
          if (!$json->errmsg) {
                 } else {
                     dump('获取access_token发生错误：错误代码'.$json->errcode.',微信返回错误信息：'.$json->errmsg) ;
