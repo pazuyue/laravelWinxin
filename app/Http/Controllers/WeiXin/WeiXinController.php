@@ -13,8 +13,46 @@ use Illuminate\Http\Request;
 class WeiXinController extends Controller
 {
 
-    public function getOpenid(Request $request){
+    private function curlGet($url){
+        //初始化
+        $curl = curl_init();
+        //设置抓取的url
+        curl_setopt($curl, CURLOPT_URL, $url);
+        //设置头文件的信息作为数据流输出
+        curl_setopt($curl, CURLOPT_HEADER, 1);
+        //设置获取的信息以文件流的形式返回，而不是直接输出。
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        //执行命令
+        $data = curl_exec($curl);
+        //关闭URL请求
+        curl_close($curl);
+        //显示获得的数据
+       return $data;
+    }
 
+    private function curlPost($url,$post_data){
+        //初始化
+        $curl = curl_init();
+        //设置抓取的url
+        curl_setopt($curl, CURLOPT_URL, $url);
+        //设置头文件的信息作为数据流输出
+        curl_setopt($curl, CURLOPT_HEADER, 1);
+        //设置获取的信息以文件流的形式返回，而不是直接输出。
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        //设置post方式提交
+        curl_setopt($curl, CURLOPT_POST, 1);
+        //设置post数据
+       /* $post_data = array(
+            "username" => "coder",
+            "password" => "12345"
+        );*/
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
+        //执行命令
+        $data = curl_exec($curl);
+        //关闭URL请求
+        curl_close($curl);
+        //显示获得的数据
+        print_r($data);
     }
 
     /**
@@ -37,7 +75,7 @@ class WeiXinController extends Controller
      * 判断是否关注
      */
     public function actionsubscribe(){
-        $token='14_T9oxX1WOBMzmW0l2O3C0nqiLqTaxXm0EiXKbuN_kKWeTKCQbdI7n4jDOm5ofj4mBpFwsjthhOXlFfgFPKWAazJ_9mc3lW75EFQAfBNHNUXA';
+        $token=$this->getAccessToken();
         $openid='oPuK51SdvJnSnBVoiaIPpce0ebvE';
         $subscribe_msg = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=$token&openid=$openid";
         $subscribe = json_decode(file_get_contents($subscribe_msg));
@@ -79,6 +117,17 @@ class WeiXinController extends Controller
         curl_close($ch);
         $res = json_decode($res,true);
     }
+
+    private function getAccessToken() {
+         $url_get = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx98e276bea8ddeca5&secret=84415899ceb3c77b58364d2468023cf7';
+         $json = json_decode($this->curlGet($url_get));
+         if (!$json->errmsg) {
+
+                } else {
+                    dump('获取access_token发生错误：错误代码'.$json->errcode.',微信返回错误信息：'.$json->errmsg) ;
+         }
+         return $json->access_token;
+        }
 
 
 
