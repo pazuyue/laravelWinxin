@@ -25,3 +25,5 @@ Route::get('/actionsubscribe', 'WeiXin\WeiXinController@actionsubscribe');
 
 Route::get('/getAccessToken', 'WeiXin\WeiXinController@getAccessToken');
 
+Route::get('/responseMsg', 'WeiXin\WeiXinController@responseMsg');
+
