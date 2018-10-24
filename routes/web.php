@@ -30,4 +30,4 @@ Route::get('/responseMsg', 'WeiXin\WeiXinController@responseMsg');
 Route::get('/login', 'WeiXin\WeiXinController@loginShow');
 Route::post('/login', 'WeiXin\WeiXinController@login');
 
-Route::post('/getmsg', 'WeiXin\GetMsgController@getmsg');
+Route::get('/getmsg', 'WeiXin\GetMsgController@getmsg');
