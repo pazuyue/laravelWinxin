@@ -15,7 +15,7 @@ define("TOKEN","yueguang");
 
 class GetMsgController extends Controller
 {
-    public function getmsg(Request $request){
+    public function getmsg(){
 
         $wechatObj = new wechatCallbackapiTest();
         $wechatObj->valid();
@@ -86,12 +86,6 @@ class wechatCallbackapiTest
                 $contentStr = $this->keyrep($keyword);
                 if (empty($contentStr)) {
                     $contentStr = "你是故意的吧，没文化真可怕";//你是故意的吧，没文化真可怕;
-                    $open_id = 'oPuK51SdvJnSnBVoiaIPpce0ebvE';
-                    $user = DB::table('admins')->where('open_id', $open_id)->first();
-                    session(['user' => $user->email]);
-                    $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
-                    echo $resultStr;
-                    return view('login');
                 }
 
                 //$contentStr = @iconv('UTF-8','gb2312',$keyword);
