@@ -40,11 +40,14 @@ class wechatCallbackapiTest
     public function responseMsg()
 
     {
+        $myfile = fopen("/data/www/laravelWx.com/public/test.txt", "a") or die("Unable to open file!");
+        fwrite($myfile, "开始");
+        fclose($myfile);
 
         //get post data, May be due to the different environments
 
         $postStr = file_get_contents("php://input");
-        $myfile = fopen("/data/www/laravelWx.com/public/test.txt", "w") or die("Unable to open file!");
+        $myfile = fopen("/data/www/laravelWx.com/public/test.txt", "a") or die("Unable to open file!");
         fwrite($myfile, $postStr);
         fclose($myfile);
 
@@ -54,7 +57,9 @@ class wechatCallbackapiTest
 
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
 
-
+            $myfile = fopen("/data/www/laravelWx.com/public/test.txt", "a") or die("Unable to open file!");
+            fwrite($myfile, $postObj);
+            fclose($myfile);
 
             $fromUsername = $postObj->FromUserName;
 
