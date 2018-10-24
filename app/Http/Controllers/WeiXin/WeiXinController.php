@@ -143,25 +143,7 @@ class WeiXinController extends Controller
         return $json->access_token;
     }
 
-    public function responseMsg(){
-        /*
-        获得请求时POST:XML字符串
-        不能用$_POST获取，因为没有key
-         */
-        $xml_str = $GLOBALS['HTTP_RAW_POST_DATA'];
-        if(empty($xml_str)){
-            die('');
-        }
-        if(!empty($xml_str)){
-            // 解析该xml字符串，利用simpleXML
-            libxml_disable_entity_loader(true);
-            //禁止xml实体解析，防止xml注入
-            $request_xml = simplexml_load_string($xml_str, 'SimpleXMLElement', LIBXML_NOCDATA);
-
-            //判断该消息的类型，通过元素MsgType
-            return $request_xml;
-        }
+    public function loginShow(){
+        return view('login');
     }
-
-
 }
