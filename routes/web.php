@@ -27,5 +27,5 @@ Route::get('/getAccessToken', 'WeiXin\WeiXinController@getAccessToken');
 
 Route::get('/responseMsg', 'WeiXin\WeiXinController@responseMsg');
 
-Route::get('/lgoin', 'WeiXin\WeiXinController@loginShow');
+Route::get('/login', 'WeiXin\WeiXinController@loginShow');
 
