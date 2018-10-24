@@ -9,6 +9,7 @@
             'csrfToken' => csrf_token(),
         ]) !!};
 </script>
+{{ Session::get('user') }}
 <head>用户登录</head>
 <form name="LoginForm" method="post" action="{{url('/login')}}">
     <p>
