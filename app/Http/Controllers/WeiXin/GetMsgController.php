@@ -17,25 +17,11 @@ class GetMsgController extends Controller
 {
     public function getmsg(){
 
-        $wechatObj = new wechatCallbackapiTest();
-        $wechatObj->valid();
-    }
-}
-
-
-class wechatCallbackapiTest
-
-{
-
-    public function valid()
-
-    {
-
         $this->responseMsg();
-        exit;
-
-
+        //exit;
+        return;
     }
+
 
     public function responseMsg()
 
@@ -198,6 +184,4 @@ class wechatCallbackapiTest
     }
 
 }
-
-
 
