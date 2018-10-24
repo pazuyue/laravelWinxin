@@ -4,7 +4,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>用户登录</head>
-<form name="LoginForm" method="post" action="{{url('login')}}" onSubmit="return InputCheck(this)">
+<form name="LoginForm" method="post" action="{{url('/login')}}" onSubmit="return InputCheck(this)">
     <p>
         <label for="username" class="label">用户名:</label>
         <input id="username" name="username" type="text" class="input" />
