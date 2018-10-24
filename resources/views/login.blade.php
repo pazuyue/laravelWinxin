@@ -13,6 +13,7 @@
 <form name="LoginForm" method="post" action="{{url('/login')}}">
     <p>
         <label for="username" class="label">用户名:</label>
+        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
         <input id="username" name="username" type="text" class="input" />
     <p/>
     <p>
