@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\WeiXin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 define("TOKEN","yueguang");
 
@@ -88,6 +89,8 @@ class wechatCallbackapiTest
                     $open_id = 'oPuK51SdvJnSnBVoiaIPpce0ebvE';
                     $user = DB::table('admins')->where('open_id', $open_id)->first();
                     session(['user' => $user->email]);
+                    $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+                    echo $resultStr;
                     return view('login');
                 }
 
