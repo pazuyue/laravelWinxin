@@ -9,6 +9,8 @@
 namespace App\Http\Controllers\WeiXin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WeiXinController extends Controller
 {
@@ -145,5 +147,13 @@ class WeiXinController extends Controller
 
     public function loginShow(){
         return view('login');
+    }
+
+    public function login(Request $request){
+        $email = htmlspecialchars($request['username']);
+        $password = MD5($request['password']);
+
+        $user = DB::table('users')->where('email', $email)->where('password', $password)->first();
+        dump($user);
     }
 }
