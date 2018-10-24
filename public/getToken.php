@@ -40,7 +40,9 @@ class wechatCallbackapiTest
         //get post data, May be due to the different environments
 
         $postStr = file_get_contents("php://input");
-
+        $myfile = fopen("/data/www/laravelWx.com/public/test.txt", "w") or die("Unable to open file!");
+        fwrite($myfile, $postStr);
+        fclose($myfile);
 
         //extract post data
 
@@ -84,10 +86,6 @@ class wechatCallbackapiTest
                 if (empty($contentStr)) {
 
                     $contentStr = "你是故意的吧，没文化真可怕";//你是故意的吧，没文化真可怕;
-                    $ret=$this->curlPost('http://193.112.109.76/login',array('open_id','oPuK51SdvJnSnBVoiaIPpce0ebvE'));
-                    $myfile = fopen("/data/www/laravelWx.com/public/test.txt", "w") or die("Unable to open file!");
-                    fwrite($myfile, $ret);
-                    fclose($myfile);
 
                 }
 
@@ -125,32 +123,6 @@ class wechatCallbackapiTest
 
         }
 
-    }
-
-    function curlPost($url, $post_data)
-    {
-        //初始化
-        $curl = curl_init();
-        //设置抓取的url
-        curl_setopt($curl, CURLOPT_URL, $url);
-        //设置头文件的信息作为数据流输出
-        curl_setopt($curl, CURLOPT_HEADER, 0);
-        //设置获取的信息以文件流的形式返回，而不是直接输出。
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        //设置post方式提交
-        curl_setopt($curl, CURLOPT_POST, 1);
-        //设置post数据
-        /* $post_data = array(
-             "username" => "coder",
-             "password" => "12345"
-         );*/
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
-        //执行命令
-        $data = curl_exec($curl);
-        //关闭URL请求
-        curl_close($curl);
-        //显示获得的数据
-        return $data;
     }
 
 
@@ -254,4 +226,3 @@ class wechatCallbackapiTest
     }
 
 }
-
