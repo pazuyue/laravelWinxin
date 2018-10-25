@@ -156,4 +156,24 @@ class WeiXinController extends Controller
         session(['user' => $user->email]);
         return view('login');
     }
+
+    public function getTicket(){
+        $access_token = $this->getAccessToken();
+        $qrcode_url = 'https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=' . $access_token;
+        $post_data = array();
+        $post_data['expire_seconds'] = 3600 * 24; //有效时间
+        $post_data['action_name'] = 'QR_SCENE';
+        $post_data['action_info']['scene']['scene_id'] = time(); //传参用户uid，微信端可获取
+        $json = $this->curlPost($qrcode_url, $post_data);
+        if (!$json['errcode']) {
+            $ticket = $json['ticket'];
+            $ticket_img = 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=' . urlencode($ticket);
+            echo "<img src='{$ticket_img}'>";
+            return ;
+        } else {
+            echo '发生错误：错误代码 ' . $json['errcode'] . '，微信返回错误信息：' . $json['errmsg'];
+            return ;
+        }
+
+    }
 }
